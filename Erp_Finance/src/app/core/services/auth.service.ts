@@ -7,6 +7,9 @@ import { User } from '../models/auth.models';
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
+    emailOTP(enteredotp: any) {
+      throw new Error('Method not implemented.');
+    }
 
     user: User;
 

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgOtpInputModule } from 'ng-otp-input'; 
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -21,10 +22,11 @@ import { PasswordresetComponent } from './passwordreset/passwordreset.component'
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    AlertModule.forRoot(),
+    AlertModule,
+    CarouselModule,
     UIModule,
     AuthRoutingModule,
-    CarouselModule
+    NgOtpInputModule
   ]
 })
 export class AuthModule { }
