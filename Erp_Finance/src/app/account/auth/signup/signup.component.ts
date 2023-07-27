@@ -150,38 +150,37 @@ export class SignupComponent  {
   onSubmit() {
     this.isSubmitted = true;
     console.log(this.emailForm.value);
-    // if (this.emailForm.valid) {
-    //   console.log(this.emailForm.value);
-    //   this.authservice.register(this.emailForm.value).subscribe(
-    //     (res: any) => {
-    //       console.log(res, 'RESPONSE FROM API');
-    //       this.otpopen = true;
-    //       this.displayemail = false;
-    //       this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
-    //       this.receivedOTP = res;
-    //       console.log(this.receivedOTP, 'sssssssssssss');
-    //       setTimeout(() => {
-    //         this.toastr.clear();
-    //       }, 2000);
+    if (this.emailForm.valid) {
+      console.log(this.emailForm.value);
+      this.authservice.Email(this.emailForm.value).subscribe(
+        (res: any) => {
+          console.log(res, 'RESPONSE FROM API');
+          this.otpopen = true;
+          this.displayemail = false;
+          this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
+          this.receivedOTP = res;
+          console.log(this.receivedOTP, 'sssssssssssss');
+          setTimeout(() => {
+            this.toastr.clear();
+          }, 2000);
 
-    //       this.otpExpired = false; // Reset the OTP expiration status
+          this.otpExpired = false; // Reset the OTP expiration status
 
-    //       // Reset the countdown timer
-    //       if (this.countdownSubscription) {
-    //         this.countdownSubscription.unsubscribe();
-    //       }
-    //       this.showCountdownTimer = false;
-    //       this.countdown = OTP_EXPIRY_TIME;
-    //       this.startCountdownTimer();
-    //     }
-    //   );
-    // }
-    this.otpopen = true;
-      this.displayemail = false;
+          // Reset the countdown timer
+          if (this.countdownSubscription) {
+            this.countdownSubscription.unsubscribe();
+          }
+          this.showCountdownTimer = false;
+          this.countdown = OTP_EXPIRY_TIME;
+          this.startCountdownTimer();
+        }
+      );
+    }
+    
   }
 
 
-  // ==================OTP VERIFICATION SUBMIT METHOD================
+  // ================== OTP VERIFICATION SUBMIT METHOD================
 
   onOtpChange(event) {
     console.log(event, '>>>>>>>>>>>>>');

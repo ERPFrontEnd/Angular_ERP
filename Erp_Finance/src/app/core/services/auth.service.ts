@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { getFirebaseBackend } from '../../authUtils';
@@ -13,7 +14,7 @@ export class AuthenticationService {
 
     user: User;
 
-    constructor() {
+    constructor(private http:HttpClient) {
     }
 
     /**
@@ -65,5 +66,15 @@ export class AuthenticationService {
         // logout the user
         getFirebaseBackend().logout();
     }
+
+// @@@@@@@@ email .....
+
+    Email(payload){
+        return this.http.post('http://localhost:8082/blang/api/v1/registration/emailOTP',payload)   
+     }
+            
+   
+
 }
+
 
