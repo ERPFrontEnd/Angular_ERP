@@ -6013,10 +6013,10 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"ngx-toastr@^16.0.2":
-  "integrity" "sha512-J6SueNCaGwm/gpXdsG56UzMEAcuayYWEW6NmIrNoe5iP7lOUohg4xYXWipkbMH9wGWmLPD9gU8AufUVWMplCvg=="
-  "resolved" "https://registry.npmjs.org/ngx-toastr/-/ngx-toastr-16.0.2.tgz"
-  "version" "16.0.2"
+"ngx-toastr@^16.2.0":
+  "integrity" "sha512-7X6UhOKiaUeC2eTOsUqctZH0ZWKG8VlzDxWJhdEF1N3kPod46SU/Vn2l0hbt8EDwTjxHKfKyevU2idkYDoZYog=="
+  "resolved" "https://registry.npmjs.org/ngx-toastr/-/ngx-toastr-16.2.0.tgz"
+  "version" "16.2.0"
   dependencies:
     "tslib" "^2.3.0"
 

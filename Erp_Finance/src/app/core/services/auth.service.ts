@@ -5,6 +5,7 @@ import { getFirebaseBackend } from '../../authUtils';
 
 import { User } from '../models/auth.models';
 
+
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
@@ -67,14 +68,25 @@ export class AuthenticationService {
         getFirebaseBackend().logout();
     }
 
-// @@@@@@@@ email .....
+    loginEmail(payload){
+        return this.http.post('http://localhost:8082/blang/api/v1/registration/emailOTP',payload)
+    }
+
 
     Email(payload){
-        return this.http.post('http://localhost:8082/blang/api/v1/registration/emailOTP',payload)   
-     }
-            
-   
+        return this.http.post('http://localhost:8082/blang/api/v1/registration/emailOTP',payload)
+    }
 
+    Otp(payload){
+        return this.http.post('http://localhost:8082/blang/api/v1/registration/verifyOTP',payload)
+    }
+
+    TextMeVerification(payload){
+        return this.http.post('http://localhost:8082/blang/api/v1/registration/mobileOTP',payload)
+    }
+    CallMeVerification(payload){
+        return this.http.post('http://localhost:8082/blang/api/v1/registration/voiceOTP',payload)
+    }
 }
 
 
