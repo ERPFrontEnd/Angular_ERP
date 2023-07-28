@@ -13,7 +13,7 @@ const OTP_EXPIRY_TIME = 30; // 30 seconds
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent  {
+export class SignupComponent {
 
   error = '';
   successmsg = false;
@@ -27,7 +27,7 @@ export class SignupComponent  {
   awWizardComponent: any;
   selectedOption: string;
   receivedOTPTime: any;
-  firstCard:boolean=true;
+  firstCard: boolean = true;
 
   // tslint:disable-next-line: max-line-length
   constructor(private formBuilder: FormBuilder,
@@ -147,7 +147,7 @@ export class SignupComponent  {
     // this.close = false;
   }
   // ===========================EMAIL SUBMIT METHOD=====================
- 
+
   onSubmit() {
     this.isSubmitted = true;
     console.log(this.emailForm.value);
@@ -177,6 +177,8 @@ export class SignupComponent  {
         }
       );
     }
+    this.otpopen = true;
+    this.displayemail = false;
   }
 
 
@@ -192,12 +194,10 @@ export class SignupComponent  {
       this.toastr.error('OTP has expired. Please generate a new OTP.', 'OTP Expired');
       return;
     }
-  
     this.isSubmitted = true;
     const enteredotp = this.otpForm.value;
     console.log('Entered OTP:', enteredotp);
     console.log('Received OTP:', this.receivedOTP);
-  
     this.authservice.Otp(enteredotp).subscribe(
       (verificationRes: any) => {
         if (verificationRes) {
@@ -216,10 +216,8 @@ export class SignupComponent  {
         this.otpExpired = true; // Set otpExpired flag to true on error
       }
     );
-    // this.showMobileNumber = true;
-    //       this.currentStep++;
   }
-  
+
 
   // ================BACT TO COMPANY STATUS==================
   back() {
@@ -290,16 +288,16 @@ export class SignupComponent  {
 
   resendOTP() {
     const RETRY_DELAY = 30000; // Set the delay before resending OTP (e.g., 30 seconds)
-  
+
     if (this.countdownSubscription) {
       this.countdownSubscription.unsubscribe();
     }
-  
+
     this.otpForm.reset();
     this.isSubmitted = false;
     this.showCountdownTimer = true;
     this.countdown = OTP_EXPIRY_TIME;
-  
+
     this.countdownSubscription = timer(0, 1000).subscribe(() => {
       this.countdown--;
       if (this.countdown === 0) {
@@ -308,9 +306,9 @@ export class SignupComponent  {
         this.otpForm.reset();
       }
     });
-  
+
     this.resending = true; // Set isResendingOTP flag to true
-  
+
     timer(RETRY_DELAY).subscribe(() => {
       this.otpForm.reset();
       this.showCountdownTimer = false;
@@ -379,4 +377,4 @@ export class SignupComponent  {
     this.selectedOption = selectedOption;
   }
 
-  }
+}

@@ -133,41 +133,55 @@
 
                               </div>
                             </div>
-                            <!-- ==========================CREATE ACCOUNT Company Info=================== -->
-                            <div *ngIf="currentStep === 2">
-                              <div class="row">
+                             <!-- ==========================CREATE ACCOUNT=================== -->
+                             <div *ngIf="currentStep === 2">
+                              <div class="p-2">
 
-                                <!-- ------------------------------Mobile form------------------- -->
-                                <div *ngIf="showMobileNumber" class="text-center">
+                                <!-- ===========================MOBILE FORM=========================== -->
+                                 <div *ngIf="showMobileNumber" class="text-center">
                                   <h3 class="mb-4 mt-4">Please enter your Mobile Number</h3>
                                   <form [formGroup]="MobileForm" (ngSubmit)="MobileSubmit()">
                                     <div class="row mb-3 justify-content-center">
+                                      <div class="col-sm-1" style=" padding:0px 0.4rem;width: 10%;">
+                                        <select class="form-control" style="padding:0.3rem"
+                                          formControlName="countryCode" (change)="onSelectCountryCode($event)">
+                                          <option *ngFor="let code of countryCodes" [value]="code"
+                                            [selected]="code === selectedCountryCode">{{ code }}</option>
+                                        </select>
+                                      </div>
                                       <div class="col-lg-8 col-md-9 col-sm-11" style="width: 60%;padding-left: 0px;">
-                                        <div class="row">
-                                          <div class="col-md-1 text-end">
-                                            <label class="col-form-label">+91</label>
-                                          </div>
-                                          <div class="col-md-7">
-                                            <div class="row mb-3">
-                                              <div class="col">
-                                                <input class="form-control" id="MobileNumber" name="MobileNumber"
-                                                  type="tel" formControlName="MobileNumber"
-                                                  [class.is-invalid]="MobileForm.get('MobileNumber').invalid && MobileForm.get('MobileNumber').touched"
-                                                  minlength="10" maxlength="10" pattern="[0-9]+">
-                                                <div
-                                                  *ngIf="MobileForm.get('MobileNumber').invalid && MobileForm.get('MobileNumber').touched"
-                                                  class="error-message text-danger" style="font-size: 12px;">Please
-                                                  enter a
-                                                  valid Mobile
-                                                  Number</div>
-                                              </div>
-                                            </div>
+                                        <input class="form-control" name="mobileNo" type="text"
+                                          formControlName="mobileNo"
+                                          [class.is-invalid]="MobileForm.get('mobileNo').invalid && MobileForm.get('mobileNo').touched"
+                                          minlength="10" maxlength="10" pattern="[0-9]{10}">
+                                        <div
+                                          *ngIf="MobileForm.get('mobileNo').invalid && MobileForm.get('mobileNo').touched"
+                                          class="error-message text-danger" style="font-size: 11px;">Enter a valid
+                                          mobile number</div>
+                                      </div>
+                                    </div>
+                                     <div class="row">
+                                      <div class="col-md-1 text-end">
+                                        <label class="col-form-label">+91</label>
+                                      </div>
+                                      <div class="col-md-7">
+                                        <div class="row mb-3">
+                                          <div class="col">
+                                            <input class="form-control" id="MobileNumber" name="MobileNumber" type="tel"
+                                              formControlName="MobileNumber"
+                                              [class.is-invalid]="MobileForm.get('MobileNumber').invalid && MobileForm.get('MobileNumber').touched"
+                                              minlength="10" maxlength="10" pattern="[0-9]+">
+                                            <div
+                                              *ngIf="MobileForm.get('MobileNumber').invalid && MobileForm.get('MobileNumber').touched"
+                                              class="error-message text-danger" style="font-size: 12px;">Please enter a
+                                              valid Mobile
+                                              Number</div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                    <!-- ================================ options to be selected========================== -->
-                                    <div class="row mt-4">
+                                <!-- ================================ options to be selected========================== -->
+                                <div class="row mt-4">
                                       <div class="col">
                                         <span style="display: inline-block; margin-bottom: 5px;">
                                           <input type="radio" name="option" value="text"
@@ -175,7 +189,7 @@
                                           Text Me
                                         </span>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span style="display: inline-block; margin-left: 10px; margin-bottom: 5px;">
-                                          <input type="radio" name="option" value="call"
+                                         <input type="radio" name="option" value="call"
                                             (change)="handleOptionChange('call')" class="radiobutton2">
                                           Call Me
                                         </span>
@@ -184,7 +198,6 @@
                                     <div class="mt-4 text-center">
                                       <button class="btn btn-primary" type="submit">Submit</button>
                                     </div>
-
                                   </form>
                                 </div>
 
@@ -193,9 +206,9 @@
                                 <div *ngIf="showOTP" class="text-center p-2 mt-4">
                                   <h4>Verify your Number</h4>
                                   <p class="mb-4 mt-4">Please enter 6 digit OTP which is sent to
-                                    {{MobileForm.value.mobileNo}}</p>
+                                  {{MobileForm.value.mobileNo}}</p>
                                   <form [formGroup]="otpForm" (ngSubmit)="onOTPSubmit()">
-                                    <input type="otp" formControlName="otp" class="form-control">
+                                     <input type="otp" formControlName="otp" class="form-control">
                                     <ng-otp-input [config]="config"></ng-otp-input>
                                     <div *ngIf="otpForm?.controls['otp']?.invalid && otpForm?.controls['otp']?.touched"
                                       class="error-message text-danger" style="font-size: 11px;">Please enter a valid
@@ -206,6 +219,7 @@
                                     </div>
                                   </form>
                                 </div>
+
                                 <!-- ==========================Company Info====================== -->
                                 <div class=" scroll-bar" style="width:535px">
                                   <form class="form-horizontal" *ngIf="showRegistration" [formGroup]="CompanyForm">
