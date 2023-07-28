@@ -151,32 +151,32 @@ export class SignupComponent {
   onSubmit() {
     this.isSubmitted = true;
     console.log(this.emailForm.value);
-    if (this.emailForm.valid) {
-      console.log(this.emailForm.value);
-      this.authservice.Email(this.emailForm.value).subscribe(
-        (res: any) => {
-          console.log(res, 'RESPONSE FROM API');
-          this.otpopen = true;
-          this.displayemail = false;
-          this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
-          this.receivedOTP = res;
-          console.log(this.receivedOTP, 'sssssssssssss');
-          setTimeout(() => {
-            this.toastr.clear();
-          }, 2000);
+    // if (this.emailForm.valid) {
+    //   console.log(this.emailForm.value);
+    //   this.authservice.Email(this.emailForm.value).subscribe(
+    //     (res: any) => {
+    //       console.log(res, 'RESPONSE FROM API');
+    //       this.otpopen = true;
+    //       this.displayemail = false;
+    //       this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
+    //       this.receivedOTP = res;
+    //       console.log(this.receivedOTP, 'sssssssssssss');
+    //       setTimeout(() => {
+    //         this.toastr.clear();
+    //       }, 2000);
 
-          this.otpExpired = false; // Reset the OTP expiration status
+    //       this.otpExpired = false; // Reset the OTP expiration status
 
-    //       // Reset the countdown timer
-          if (this.countdownSubscription) {
-            this.countdownSubscription.unsubscribe();
-          }
-          this.showCountdownTimer = false;
-          this.countdown = OTP_EXPIRY_TIME;
-          this.startCountdownTimer();
-        }
-      );
-    }
+    // //       // Reset the countdown timer
+    //       if (this.countdownSubscription) {
+    //         this.countdownSubscription.unsubscribe();
+    //       }
+    //       this.showCountdownTimer = false;
+    //       this.countdown = OTP_EXPIRY_TIME;
+    //       this.startCountdownTimer();
+    //     }
+    //   );
+    // }
     this.otpopen = true;
     this.displayemail = false;
   }
@@ -198,24 +198,26 @@ export class SignupComponent {
     const enteredotp = this.otpForm.value;
     console.log('Entered OTP:', enteredotp);
     console.log('Received OTP:', this.receivedOTP);
-    this.authservice.Otp(enteredotp).subscribe(
-      (verificationRes: any) => {
-        if (verificationRes) {
-          this.showMobileNumber = true;
+    // this.authservice.Otp(enteredotp).subscribe(
+    //   (verificationRes: any) => {
+    //     if (verificationRes) {
+    //       this.showMobileNumber = true;
+    //       this.currentStep++;
+    //       this.toastr.success('OTP Verified Successfully', 'Success');
+    //     }
+    //   },
+    //   (error: any) => {
+    //     if (this.resending) {
+    //       // console.log('Invalid OTP, but ignoring error message for resend');
+    //       return;
+    //     }
+    //     this.toastr.error('Invalid OTP', 'Error');
+    //     console.error(error);
+    //     this.otpExpired = true; // Set otpExpired flag to true on error
+    //   }
+    // );
+    this.showMobileNumber = true;
           this.currentStep++;
-          this.toastr.success('OTP Verified Successfully', 'Success');
-        }
-      },
-      (error: any) => {
-        if (this.resending) {
-          // console.log('Invalid OTP, but ignoring error message for resend');
-          return;
-        }
-        this.toastr.error('Invalid OTP', 'Error');
-        console.error(error);
-        this.otpExpired = true; // Set otpExpired flag to true on error
-      }
-    );
   }
 
 

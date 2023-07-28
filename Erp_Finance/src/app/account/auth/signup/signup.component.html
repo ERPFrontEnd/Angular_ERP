@@ -36,7 +36,7 @@
 
                 </div>
               </div>
-
+ 
               <div class="col-lg-9 col-12 px-0">
                 <div class="account-pages my-5">
                   <div class="container">
@@ -191,23 +191,27 @@
                                   </form>
                                 </div>
                                 <!-- =====================OTP FORM======================== -->
-                                <div *ngIf="showOTP" class="text-center p-2 mt-4">
-                                  <h4>Verify your Number</h4>
-                                  <p class="mb-4 mt-4">Please enter 6 digit OTP which is sent to
-                                    {{MobileForm.value.mobileNo}}</p>
-                                  <form [formGroup]="otpForm" (ngSubmit)="onOTPSubmit()">
-                                    <input type="otp" formControlName="otp" class="form-control">
-                                    <ng-otp-input [config]="config"></ng-otp-input>
-                                    <div *ngIf="otpForm?.controls['otp']?.invalid && otpForm?.controls['otp']?.touched"
-                                      class="error-message text-danger" style="font-size: 11px;">Please enter a valid
-                                      OTP
+                                <div class="container mt-5">
+                                  <!-- Your content before the OTP input here -->
+                                
+                                  <!-- OTP Input -->
+                                  <div *ngIf="showOTP" class="row justify-content-center">
+                                    <div class=" text-center">
+                                      <h4>Verify your Number</h4>
+                                      <p class="mb-4 mt-4">Please enter the 6-digit OTP which is sent to {{ MobileForm.value.mobileNo }}</p>
+                                      <form [formGroup]="otpForm" (ngSubmit)="onOTPSubmit()" class="form-inline">
+                                        <div class="form-group mr-2">
+                                          <ng-otp-input [config]="config" formControlName="otp"></ng-otp-input>
+                                          <div *ngIf="otpForm.get('otp').invalid && otpForm.get('otp').touched" class="text-danger">Please enter a valid OTP</div>
+                                        </div>
+                                        <button class="btn btn-primary mt-4" type="submit">Submit</button>
+                                      </form>
                                     </div>
-                                    <div class="mt-4 text-center">
-
-                                      <button class="btn btn-primary custom-btn-md" type="submit">Submit</button>
-                                    </div>
-                                  </form>
+                                  </div>
+                                
+                                  <!-- Your content after the OTP input here -->
                                 </div>
+                                
                                 <!-- ==========================Company Info====================== -->
                                 <div class="scroll-bar" style="width:535px">
                                   <form class="form-horizontal" *ngIf="showRegistration" [formGroup]="CompanyForm">
@@ -273,7 +277,7 @@
                                       </div>
                                     </div>
 
-                                    <!-- -----------------------BUSINESS PHONE NUMBER-------------------->
+                                    <!-- ----------------------- BUSINESS PHONE NUMBER-------------------->
 
                                     <div class="row">
                                       <div class="col-sm-12 col-md-5">
@@ -353,7 +357,7 @@
                                       </div>
                                     </div>
 
-                                    <!-- -----------------------ORGANIZATION COUNTYR-------------------->
+                                    <!-------------------------ORGANIZATION COUNTYR-------------------->
 
                                     <div class="row">
                                       <div class="col-sm-12 col-md-5">
