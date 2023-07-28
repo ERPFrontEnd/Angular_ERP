@@ -42,10 +42,10 @@ h3 {
     
 }
 
-// .col-md-7 {
-//     width: 77%;
-//     margin-left: 2rem;
-// }
+.col-md-7 {
+    width: 77%;
+    margin-left: 2rem;
+}
 // ==========SELECT CARD FOR HIGHLIGHT===========
 .cardsize.selected {
     background-color: #e8f0fe;
@@ -146,9 +146,9 @@ $cardHeight: 62vh;
     overflow-x: hidden;
 }
 
-// .cardbody {
-//     height: calc(62vh - 90px);
-// }
+.cardbody {
+    height: calc(62vh - 90px);
+}
 
 .verify {
     position: sticky;
