@@ -74,17 +74,20 @@ export class SignupComponent  {
 
     // ==================CompanyForm==================
     this.CompanyForm = this.formBuilder.group({
-      adminDisplayName: ['',],
-      adminFirstName: ['', Validators.required],
-      adminLastName: ['', Validators.required],
-      businessPhoneNo: ['', Validators.required],
-      country: ['', Validators.required],
+      // adminDisplayName: ['',],
+      // adminFirstName: ['', Validators.required],
+      // adminLastName: ['', Validators.required],
+      // businessPhoneNo: ['', Validators.required],
+      // country: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       mobileNo: ['', Validators.required],
-      organizationCountry: ['', Validators.required],
-      ownershipType: ['', Validators.required],
-      state: ['', Validators.required],
-      zipCode: ['', Validators.required],
+      countryCode: ['', Validators.required],
+      name: ['', Validators.required],
+
+      // organizationCountry: ['', Validators.required],
+      // ownershipType: ['', Validators.required],
+      // state: ['', Validators.required],
+      // zipCode: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), this.strongPasswordValidator]],
       ConfirmPassword: ['', [Validators.required]],
     }, { validator: this.passwordMatchValidator });
@@ -148,34 +151,32 @@ export class SignupComponent  {
   onSubmit() {
     this.isSubmitted = true;
     console.log(this.emailForm.value);
-    // if (this.emailForm.valid) {
-    //   console.log(this.emailForm.value);
-    //   this.authservice.Email(this.emailForm.value).subscribe(
-    //     (res: any) => {
-    //       console.log(res, 'RESPONSE FROM API');
-    //       this.otpopen = true;
-    //       this.displayemail = false;
-    //       this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
-    //       this.receivedOTP = res;
-    //       console.log(this.receivedOTP, 'sssssssssssss');
-    //       setTimeout(() => {
-    //         this.toastr.clear();
-    //       }, 2000);
+    if (this.emailForm.valid) {
+      console.log(this.emailForm.value);
+      this.authservice.Email(this.emailForm.value).subscribe(
+        (res: any) => {
+          console.log(res, 'RESPONSE FROM API');
+          this.otpopen = true;
+          this.displayemail = false;
+          this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
+          this.receivedOTP = res;
+          console.log(this.receivedOTP, 'sssssssssssss');
+          setTimeout(() => {
+            this.toastr.clear();
+          }, 2000);
 
           this.otpExpired = false; // Reset the OTP expiration status
 
     //       // Reset the countdown timer
-    //       if (this.countdownSubscription) {
-    //         this.countdownSubscription.unsubscribe();
-    //       }
-    //       this.showCountdownTimer = false;
-    //       this.countdown = OTP_EXPIRY_TIME;
-    //       this.startCountdownTimer();
-    //     }
-    //   );
-    // }
-    this.otpopen = true;
-          this.displayemail = false;
+          if (this.countdownSubscription) {
+            this.countdownSubscription.unsubscribe();
+          }
+          this.showCountdownTimer = false;
+          this.countdown = OTP_EXPIRY_TIME;
+          this.startCountdownTimer();
+        }
+      );
+    }
   }
 
 
@@ -187,36 +188,36 @@ export class SignupComponent  {
   }
 
   onOTPSubmit() {
-    // if (this.otpExpired && !this.resending) {
-    //   this.toastr.error('OTP has expired. Please generate a new OTP.', 'OTP Expired');
-    //   return;
-    // }
+    if (this.otpExpired && !this.resending) {
+      this.toastr.error('OTP has expired. Please generate a new OTP.', 'OTP Expired');
+      return;
+    }
   
-    // this.isSubmitted = true;
-    // const enteredotp = this.otpForm.value;
-    // console.log('Entered OTP:', enteredotp);
-    // console.log('Received OTP:', this.receivedOTP);
+    this.isSubmitted = true;
+    const enteredotp = this.otpForm.value;
+    console.log('Entered OTP:', enteredotp);
+    console.log('Received OTP:', this.receivedOTP);
   
-    // this.authservice.Otp(enteredotp).subscribe(
-    //   (verificationRes: any) => {
-    //     if (verificationRes) {
-    //       this.showMobileNumber = true;
-    //       this.currentStep++;
-    //       this.toastr.success('OTP Verified Successfully', 'Success');
-    //     }
-    //   },
-    //   (error: any) => {
-    //     if (this.resending) {
-    //       // console.log('Invalid OTP, but ignoring error message for resend');
-    //       return;
-    //     }
-    //     this.toastr.error('Invalid OTP', 'Error');
-    //     console.error(error);
-    //     this.otpExpired = true; // Set otpExpired flag to true on error
-    //   }
-    // );
-    this.showMobileNumber = true;
+    this.authservice.Otp(enteredotp).subscribe(
+      (verificationRes: any) => {
+        if (verificationRes) {
+          this.showMobileNumber = true;
           this.currentStep++;
+          this.toastr.success('OTP Verified Successfully', 'Success');
+        }
+      },
+      (error: any) => {
+        if (this.resending) {
+          // console.log('Invalid OTP, but ignoring error message for resend');
+          return;
+        }
+        this.toastr.error('Invalid OTP', 'Error');
+        console.error(error);
+        this.otpExpired = true; // Set otpExpired flag to true on error
+      }
+    );
+    // this.showMobileNumber = true;
+    //       this.currentStep++;
   }
   
 
