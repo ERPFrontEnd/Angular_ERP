@@ -1,0 +1,104 @@
+.navbar-brand-box {
+    // padding: 0 1.5rem; 
+    //  text-align: center; 
+    width: 100px;
+}
+
+#page-topbar {
+    background-color: #2A3042;
+}
+
+
+.title{
+    color: white;
+    margin-left: 20px;
+    margin-top: 11px;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.noti-icon i {
+    font-size: 22px;
+    color: white;
+}
+
+.ms-1{
+    // font-size: 22px;
+    color: white;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    /* This will create the white circle */
+    width: 50px;
+    /* Adjust this width to control the circle size */
+    height: 50px;
+    /* Adjust this height to control the circle size */
+    border-radius: 50%;
+    /* This creates the circular shape */
+    margin: 0 auto;
+    /* This centers the circle horizontally on the page */
+    position: relative;
+    // top: 50px;
+    /* Adjust this value to vertically align the circle with the navbar */
+}
+
+// .container {
+//     margin: 5px; /* Add any margin you want */
+//     width: 100%;
+//     height: 300px; /* Set the height of the white space rectangle */
+//     background-color: white; /* Set the background color to white */
+// }
+
+// .curve {
+//     width: 100%;
+//     height: 100%;
+//     border-radius: 50%; /* Set the border radius to 50% to make it a circle */
+//     overflow: hidden; /* Clip the image to fit the circular shape */
+// }
+
+.container {
+    width: auto;
+    height: 350px; /* Set the total height of the container */
+    position: relative; /* Needed for positioning the curve div and the image */
+    overflow: hidden; /* Clip the image and curve to fit the container */
+    background-color: rgba(15, 53, 242, 0.25) !important; /* Set the background color to the desired color */
+}
+
+.image-in-curve {
+    position: absolute;
+    bottom: 0; /* Position the image at the bottom of the container */
+    right: 0; /* Position the image on the right side of the container */
+    left: 60%; /* Adjust the position of the image on the right side */
+    border-radius: 50% 0 0 50%; /* Set the border radius to 50% to clip the image to the curve */
+}
+
+.onPatch{
+    color: rgb(6, 0, 0);
+    // font-style: ;
+}
+
+/* Define the styles for the purple button */
+.purple-button {
+    background-color: #0d6efd; /* Set the background color to purple */
+    color: white; /* Set the text color to white (or any color that contrasts well with purple) */
+    padding: 10px 20px; /* Add padding to adjust the button size */
+    border: none; /* Remove the default button border */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    transition: box-shadow 0.3s; /* Add a smooth transition for the shadow effect */
+}
+
+/* Add a hover effect */
+.purple-button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase the shadow effect on hover */
+    background-color: #336abc;
+}
+
+
+  
+  

@@ -1,0 +1,134 @@
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a routerLink="/" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo.svg" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <!-- <img src="assets\images\Logo.png.png" alt="" height="80"> -->
+                    </span>
+
+                </a>
+
+                <a routerLink="/" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo-light.svg" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-light.png" alt="" height="19">
+                    </span>
+                </a>
+            </div>
+            <div class="logo-container"> <img src="assets\images\Logo.png.png" alt="" height="60" class="mt-1">
+            </div>
+            <h3 class="title">B LANG</h3>
+
+            <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item" (click)="toggleMenubar()">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+
+            <!-- <h3 class="text-center mt-4">Company</h3> -->
+        </div>
+
+        <div class="d-flex">
+
+            <div class="dropdown d-inline-block d-lg-none me-2" dropdown>
+                <button type="button" class="btn header-item noti-icon" id="page-header-search-dropdown" dropdownToggle>
+                    <i class="mdi mdi-magnify"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" *dropdownMenu>
+
+                    <form class="p-3">
+                        <div class="m-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search ..."
+                                    aria-label="Recipient's username">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i
+                                            class="mdi mdi-magnify"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="dropdown d-inline-block" dropdown>
+                <button type="button" class="btn header-item" id="page-header-user-dropdown" dropdownToggle>
+                    <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="16">
+                    <span class="ms-1">{{countryName}}</span>
+                    <img *ngIf="flagvalue === undefined" src="{{valueset}}" alt="Header Language" height="16">
+                    <span *ngIf="flagvalue === undefined" class="ms-1">English</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item" *ngFor="let item of listLang"
+                        (click)="setLanguage(item.text, item.lang, item.flag)"
+                        [ngClass]="{'active': cookieValue === item.lang}">
+                        <img src="{{item.flag}}" alt="user-image" class="ms-1" height="12"> <span
+                            class="align-middle">{{item.text}}</span>
+                    </a>
+                    <!-- item-->
+                </div>
+            </div>
+
+
+
+            <div class="dropdown d-inline-block" dropdown>
+                <button type="button" class="btn header-item" id="page-header-user-dropdown" dropdownToggle>
+                    <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                        alt="Header Avatar">
+                    <span class="d-none d-xl-inline-block ms-1">Henry</span>
+                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
+                    <!-- item-->
+                    <a class="dropdown-item" href="javascript: void(0);"><i
+                            class="bx bx-user font-size-16 align-middle me-1"></i>
+                        {{ 'HEADER.LOGIN.PROFILE' }}</a>
+                    <a class="dropdown-item" href="javascript: void(0);"><i
+                            class="bx bx-wallet font-size-16 align-middle me-1"></i>{{ 'HEADER.LOGIN.MY_WALLET'
+                        }}</a>
+                    <a class="dropdown-item d-block" href="javascript: void(0);"><span
+                            class="badge bg-success float-end">11</span><i
+                            class="bx bx-wrench font-size-16 align-middle me-1"></i>{{ 'HEADER.LOGIN.SETTINGS' }}
+                    </a>
+                    <a class="dropdown-item" href="javascript: void(0);"><i
+                            class="bx bx-lock-open font-size-16 align-middle me-1"></i>
+                        {{ 'HEADER.LOGIN.LOCK_SCREEN' }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
+                            class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
+                        {{ 'HEADER.LOGIN.LOGOUT' }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<br><br><br>
+
+<!-- <div class="mx-5 my-5">
+    <img src="../assets/images/Company-Image.png" alt="" height="400" width="50%">
+</div> -->
+
+<div class="container mt-5">
+    <div class="m-4 onPatch">
+        <!-- Add your text here -->
+        <h1>Hi, Welcome to BLang Yesho!</h1>
+        <p class="fw-medium fs-5 pt-2">BLang is an Accounting Application for : </p>
+            <ul class="">
+                <li class="pt-2">Recording day to day Transactions of your Business in the Books of Accounts.</li>
+                <li class="pt-2">Classifying such Transactions into individual Ledgers. </li>
+                <li class="pt-2">Generating Financial Statements to evaluate Performance and Position of Businesses. </li>
+                <li class="pt-2">Helps in calculation and filing of Taxation at your Businesses. </li>
+                <li class="pt-2">Automated Accounting Application, BLang makes Books of Accounts effective. </li>
+            </ul>
+            <button type="button" class="purple-button">Company</button>
+        
+    </div>
+    <img src="../assets/images/Company-Image.png" alt="" height="350" width="40%" class="image-in-curve">
+</div>
+

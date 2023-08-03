@@ -64,30 +64,11 @@ export class SignupComponent {
       otp: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
     });
 
-    // ===========MobileForm==========
-
-    this.MobileForm = this.formBuilder.group({
-      countryCode: ['+91', Validators.required],
-      mobileNo: ['', Validators.required]
-
-    });
-
     // ==================CompanyForm==================
     this.CompanyForm = this.formBuilder.group({
-      // adminDisplayName: ['',],
-      // adminFirstName: ['', Validators.required],
-      // adminLastName: ['', Validators.required],
-      // businessPhoneNo: ['', Validators.required],
-      // country: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName : ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      mobileNo: ['', Validators.required],
-      countryCode: ['', Validators.required],
-      name: ['', Validators.required],
-
-      // organizationCountry: ['', Validators.required],
-      // ownershipType: ['', Validators.required],
-      // state: ['', Validators.required],
-      // zipCode: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), this.strongPasswordValidator]],
       ConfirmPassword: ['', [Validators.required]],
     }, { validator: this.passwordMatchValidator });
@@ -131,9 +112,9 @@ export class SignupComponent {
   get type() {
     return this.emailForm.controls;
   }
-  get f() {
-    return this.MobileForm.controls;
-  }
+  // get f() {
+  //   return this.MobileForm.controls;
+  // }
   // ====================================================
 
   displayemail: boolean = true;
@@ -151,36 +132,45 @@ export class SignupComponent {
   onSubmit() {
     this.isSubmitted = true;
     console.log(this.emailForm.value);
-    // if (this.emailForm.valid) {
-    //   console.log(this.emailForm.value);
-    //   this.authservice.Email(this.emailForm.value).subscribe(
-    //     (res: any) => {
-    //       console.log(res, 'RESPONSE FROM API');
-    //       this.otpopen = true;
-    //       this.displayemail = false;
-    //       this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
-    //       this.receivedOTP = res;
-    //       console.log(this.receivedOTP, 'sssssssssssss');
-    //       setTimeout(() => {
-    //         this.toastr.clear();
-    //       }, 2000);
+    if (this.emailForm.valid) {
+      console.log(this.emailForm.value);
+      this.authservice.Email(this.emailForm.value).subscribe(
+        (res: any) => {
+          console.log(res, 'RESPONSE FROM API');
+          if(res.data === false){
+            this.otpopen = false;
+            this.toastr.error('User Already Registered', 'Try Another');
+          }else{
+            this.otpopen = true;
+          
+          
+          this.displayemail = false;
+          this.toastr.success('OTP has been sent to your mail', 'Please Enter OTP');
+          this.receivedOTP = res;
+          console.log(this.receivedOTP, 'sssssssssssss');
+          setTimeout(() => {
+            this.toastr.clear();
+          }, 2000);
 
-    //       this.otpExpired = false; // Reset the OTP expiration status
+          this.otpExpired = false; // Reset the OTP expiration status
 
-    // //       // Reset the countdown timer
-    //       if (this.countdownSubscription) {
-    //         this.countdownSubscription.unsubscribe();
-    //       }
-    //       this.showCountdownTimer = false;
-    //       this.countdown = OTP_EXPIRY_TIME;
-    //       this.startCountdownTimer();
-    //     }
-    //   );
-    // }
-    this.otpopen = true;
-    this.displayemail = false;
+       // Reset the countdown timer
+          if (this.countdownSubscription) {
+            this.countdownSubscription.unsubscribe();
+          }
+          this.showCountdownTimer = false;
+          this.countdown = OTP_EXPIRY_TIME;
+          this.startCountdownTimer();
+        }
+      }
+      );
+    }
   }
 
+  OTPsubmit(){
+    this.showRegistration = true;
+    this.showOTP = false;
+  }
 
   // ================== OTP VERIFICATION SUBMIT METHOD================
 
@@ -198,26 +188,25 @@ export class SignupComponent {
     const enteredotp = this.otpForm.value;
     console.log('Entered OTP:', enteredotp);
     console.log('Received OTP:', this.receivedOTP);
-    // this.authservice.Otp(enteredotp).subscribe(
-    //   (verificationRes: any) => {
-    //     if (verificationRes) {
-    //       this.showMobileNumber = true;
-    //       this.currentStep++;
-    //       this.toastr.success('OTP Verified Successfully', 'Success');
-    //     }
-    //   },
-    //   (error: any) => {
-    //     if (this.resending) {
-    //       // console.log('Invalid OTP, but ignoring error message for resend');
-    //       return;
-    //     }
-    //     this.toastr.error('Invalid OTP', 'Error');
-    //     console.error(error);
-    //     this.otpExpired = true; // Set otpExpired flag to true on error
-    //   }
-    // );
-    this.showMobileNumber = true;
+    this.authservice.Otp(enteredotp).subscribe(
+      (verificationRes: any) => {
+        if (verificationRes) {
+          this.showRegistration = true;
           this.currentStep++;
+          this.toastr.success('OTP Verified Successfully', 'Success');
+        }
+      },
+      (error: any) => {
+        if (this.resending) {
+          // console.log('Invalid OTP, but ignoring error message for resend');
+          return;
+        }
+        this.toastr.error('Invalid OTP', 'Error');
+        console.error(error);
+        this.otpExpired = true; // Set otpExpired flag to true on error
+      }
+    );
+   
   }
 
 
@@ -228,15 +217,15 @@ export class SignupComponent {
     this.otpopen = false;
   }
 
-  // // ===================
-  backtoEmail() {
-    this.showRegistration = false;
-    this.emailForm.reset();
-    // this.close = true;
-    this.isSubmitted = false;
-    this.displayemail = true;
-    this.otpopen = false;
-  }
+  // // // ===================
+  // backtoEmail() {
+  //   this.showRegistration = false;
+  //   this.emailForm.reset();
+  //   // this.close = true;
+  //   this.isSubmitted = false;
+  //   this.displayemail = true;
+  //   this.otpopen = false;
+  // }
 
   // ======================SELECT CARD IN COMPANT STATUS====================
   // In your component class
@@ -250,8 +239,6 @@ export class SignupComponent {
   // =============================CREATE ACCOUNT============================
   showOTP = false;
   showRegistration = false;
-  showMobileNumber = true;
-  MobileForm: FormGroup;
   OTPForm: FormGroup;
   confirmation: boolean = false
 
@@ -259,18 +246,21 @@ export class SignupComponent {
 
   verifyaccount() {
     this.isSubmitted = true;
-    // this.authservice.AddAdminUser(this.CompanyForm.value).subscribe((res: any) => {
-    //   console.log(res, '>>>>>>>>>>>>>');
-    //   console.log(this.CompanyForm.value, '9999999999999999');
-    //   if (this.CompanyForm.valid) {
-    //     console.log(this.CompanyForm.value, '----------------------');
-    //     this.showRegistration = false;
+    this.authservice.AddAdminUser(this.CompanyForm.value).subscribe((res: any) => {
+      console.log(res, '>>>>>>>>>>>>>');
+      console.log(this.CompanyForm.value, '9999999999999999');
+      if (this.CompanyForm.valid) {
+        console.log(this.CompanyForm.value, '----------------------');
+        this.showRegistration = false;
+        this.confirmation = true;
+        // this.firstCard=false;
+        this.currentStep++;
+        this.toastr.success('SignUp Successful', 'Success');
+      }
+    });
+    // this.showRegistration = false;
     //     this.confirmation = true;
-    //     // this.firstCard=false;
     //     this.currentStep++;
-    //     this.toastr.success('SignUp Successful', 'Success');
-    //   }
-    // });
   }
 
   // ================Country codes=======================
@@ -336,47 +326,6 @@ export class SignupComponent {
     });
   }
 
-  MobileSubmit() {
-    this.isSubmitted = true;
-
-    console.log(this.MobileForm, '==========')
-
-    if (this.MobileForm.valid) {
-      console.log(this.MobileForm.value);
-
-      if (this.selectedOption === 'text') {
-        this.authservice.TextMeVerification(this.MobileForm.value).subscribe(
-          (res: any) => {
-            console.log(res, 'RESPONSE');
-            this.handleVerificationSuccess();
-          },
-        );
-      } else if (this.selectedOption === 'call') {
-        this.authservice.CallMeVerification(this.MobileForm.value).subscribe(
-          (res: any) => {
-            console.log(res, 'RESPONSE');
-            this.handleVerificationSuccess();
-          },
-        );
-      }
-    }
-    // this.showOTP = true;
-    // this.showMobileNumber = false;
-  }
-
-  // ==================MOBILE VERIFICATION====================
-  handleVerificationSuccess() {
-    this.showOTP = true;
-    this.showMobileNumber = false;
-    this.toastr.success('OTP has been sent to your Mobile Number', 'Please Enter OTP');
-    setTimeout(() => {
-      this.toastr.clear();
-    }, 2000);
-  }
-
-  // ================RADIO BUTTON=================
-  handleOptionChange(selectedOption: string) {
-    this.selectedOption = selectedOption;
-  }
+ 
 
 }

@@ -2,6 +2,8 @@
 .labelpositiom {
     top: 7px !important;
     position: relative !important;
+    text-align: left;
+    margin-left: 15px;
 }
 
 // =======Button Styling=========
@@ -138,7 +140,7 @@ h3 {
     overflow-x: hidden;
 }
 
-$cardHeight: 62vh;
+// $cardHeight: 62vh;
 
 .scroll-bar {
     height: calc(62vh - 150px);

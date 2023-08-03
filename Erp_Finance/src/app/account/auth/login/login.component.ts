@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
-
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators'; 
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -30,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService) { }
+    private authFackservice: AuthfakeauthenticationService, private authservice:AuthenticationService, private toastr:ToastrService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -52,30 +50,25 @@ export class LoginComponent implements OnInit {
    * Form submit
    */
   onSubmit() {
+    console.log(this.loginForm.value);
     this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
-          this.router.navigate(['/dashboard']);
-        })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
-      } else {
-        this.authFackservice.login(this.f.email.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.router.navigate(['/dashboard']);
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-      }
+    if (this.loginForm.valid) {
+      this.authservice.login(this.loginForm.value).subscribe(
+        (res: any) => {
+          console.log(res, 'RESPONSE FROM API AFTER LOGIN');
+          if (res) {
+            localStorage.setItem('ERP_NEW_WEB_USERID', res.data.id);
+            localStorage.setItem('ERP_NEW_WEB_TOKEN', res.data.jwtToken);
+            console.log(localStorage.getItem('ERP_NEW_WEB_TOKEN'));
+            this.router.navigate(['/dashboard']);
+            this.toastr.success('Login Successfully', 'Success');
+          }
+        },
+        (error: any) => {
+          this.toastr.error('An error occurred', 'Error');
+          this.router.navigate(['/account/login']);
+        }
+      );
     }
   }
 }

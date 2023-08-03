@@ -30,12 +30,12 @@ export class AuthenticationService {
      * @param email email of user
      * @param password password of user
      */
-    login(email: string, password: string) {
-        return getFirebaseBackend().loginUser(email, password).then((response: any) => {
-            const user = response;
-            return user;
-        });
-    }
+    // login(email: string, password: string) {
+    //     return getFirebaseBackend().loginUser(email, password).then((response: any) => {
+    //         const user = response;
+    //         return user;
+    //     });
+    // }
 
     /**
      * Performs the register
@@ -67,6 +67,9 @@ export class AuthenticationService {
         // logout the user
         getFirebaseBackend().logout();
     }
+    login(payload){
+        return this.http.post('http://localhost:8082/blang/api/v1/signin/login',payload)
+    }
 
     loginEmail(payload){
         return this.http.post('http://localhost:8082/blang/api/v1/registration/emailOTP',payload)
@@ -86,6 +89,19 @@ export class AuthenticationService {
     }
     CallMeVerification(payload){
         return this.http.post('http://localhost:8082/blang/api/v1/registration/voiceOTP',payload)
+    }
+    AddAdminUser(payload){
+        return this.http.post('http://localhost:8082/blang/api/v1/registration/saveAdmin',payload)
+    }
+
+     // =============TOKEN FROM LOCALSTORAGE==============
+     gettoken() {
+
+        return localStorage.getItem('ERP_NEW_WEB_TOKEN');
+    }
+    getid(){
+        return localStorage.getItem('ERP_NEW_WEB_USERID');
+
     }
 }
 

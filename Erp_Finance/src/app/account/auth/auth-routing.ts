@@ -8,6 +8,8 @@ import { SignupComponent } from './signup/signup.component';
 import { PasswordresetComponent } from './passwordreset/passwordreset.component';
 import { Register2Component } from './register2/register2.component';
 import { Recoverpwd2Component } from './recoverpwd2/recoverpwd2.component';
+import { SetupCompanyComponent } from './setup-company/setup-company.component';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -33,7 +35,12 @@ const routes: Routes = [
     {
         path: 'login-2',
         component: Login2Component
-    }
+    },
+
+    {
+        path: 'setup-company',
+        component: SetupCompanyComponent
+    },
 ];
 
 @NgModule({
