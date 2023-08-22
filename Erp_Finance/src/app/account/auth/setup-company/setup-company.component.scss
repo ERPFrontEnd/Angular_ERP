@@ -1,3 +1,7 @@
+.wholePage_Margins {
+    margin: 68px;
+}
+
 .navbar-brand-box {
     // padding: 0 1.5rem; 
     //  text-align: center; 
@@ -9,7 +13,7 @@
 }
 
 
-.title{
+.title {
     color: white;
     margin-left: 20px;
     margin-top: 11px;
@@ -22,7 +26,7 @@
     color: white;
 }
 
-.ms-1{
+.ms-1 {
     // font-size: 22px;
     color: white;
 }
@@ -46,59 +50,88 @@
     /* Adjust this value to vertically align the circle with the navbar */
 }
 
-// .container {
-//     margin: 5px; /* Add any margin you want */
-//     width: 100%;
-//     height: 300px; /* Set the height of the white space rectangle */
-//     background-color: white; /* Set the background color to white */
-// }
-
-// .curve {
-//     width: 100%;
-//     height: 100%;
-//     border-radius: 50%; /* Set the border radius to 50% to make it a circle */
-//     overflow: hidden; /* Clip the image to fit the circular shape */
-// }
+// -------------------------Image Should be in curve----------------------
 
 .container {
     width: auto;
-    height: 350px; /* Set the total height of the container */
-    position: relative; /* Needed for positioning the curve div and the image */
-    overflow: hidden; /* Clip the image and curve to fit the container */
-    background-color: rgba(15, 53, 242, 0.25) !important; /* Set the background color to the desired color */
+    margin-top: 100px;
+    height: 350px;
+    /* Set the total height of the container */
+    position: relative;
+    /* Needed for positioning the curve div and the image */
+    overflow: hidden;
+    /* Clip the image and curve to fit the container */
+    background-color: rgba(15, 53, 242, 0.25) !important;
+    /* Set the background color to the desired color */
 }
 
 .image-in-curve {
     position: absolute;
-    bottom: 0; /* Position the image at the bottom of the container */
-    right: 0; /* Position the image on the right side of the container */
-    left: 60%; /* Adjust the position of the image on the right side */
-    border-radius: 50% 0 0 50%; /* Set the border radius to 50% to clip the image to the curve */
+    bottom: 0;
+    /* Position the image at the bottom of the container */
+    right: 0;
+    /* Position the image on the right side of the container */
+    left: 60%;
+    /* Adjust the position of the image on the right side */
+    border-radius: 50% 0 0 50%;
+    /* Set the border radius to 50% to clip the image to the curve */
 }
 
-.onPatch{
+.onPatch {
     color: rgb(6, 0, 0);
     // font-style: ;
 }
 
 /* Define the styles for the purple button */
 .purple-button {
-    background-color: #0d6efd; /* Set the background color to purple */
-    color: white; /* Set the text color to white (or any color that contrasts well with purple) */
-    padding: 10px 20px; /* Add padding to adjust the button size */
-    border: none; /* Remove the default button border */
-    border-radius: 5px; /* Add border-radius for rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
-    cursor: pointer; /* Add a pointer cursor on hover */
-    transition: box-shadow 0.3s; /* Add a smooth transition for the shadow effect */
+    background-color: #0d6efd;
+    /* Set the background color to purple */
+    color: white;
+    /* Set the text color to white (or any color that contrasts well with purple) */
+    padding: 10px 20px;
+    /* Add padding to adjust the button size */
+    border: none;
+    /* Remove the default button border */
+    border-radius: 5px;
+    /* Add border-radius for rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Add a shadow effect */
+    cursor: pointer;
+    /* Add a pointer cursor on hover */
+    transition: box-shadow 0.3s;
+    /* Add a smooth transition for the shadow effect */
 }
 
 /* Add a hover effect */
 .purple-button:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase the shadow effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Increase the shadow effect on hover */
     background-color: #336abc;
 }
 
 
-  
-  
+.card {
+    height: 150px;
+    width: 550px;
+    // background-color: rgba(15, 53, 242, 0.25) !important;
+    background-color: rgba(8, 41, 202, 0.532) !important;
+    color: white;
+    // padding: 1rem;
+}
+
+.row {
+    margin-left: 0px;
+}
+
+.card.right-margin {
+    margin-left: 30px;
+    /* Add margin only to the right side of every second card */
+}
+
+.Blang-Card{
+    // height: 300px;
+    // width: 99%;
+    margin-left: 1rem;
+    padding-right: 1rem;
+    // background-color: rgba(15, 53, 242, 0.25) !important;
+}

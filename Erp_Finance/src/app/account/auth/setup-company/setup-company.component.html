@@ -108,27 +108,94 @@
         </div>
     </div>
 </header>
-<br><br><br>
 
-<!-- <div class="mx-5 my-5">
-    <img src="../assets/images/Company-Image.png" alt="" height="400" width="50%">
-</div> -->
-
-<div class="container mt-5">
-    <div class="m-4 onPatch">
-        <!-- Add your text here -->
-        <h1>Hi, Welcome to BLang Yesho!</h1>
-        <p class="fw-medium fs-5 pt-2">BLang is an Accounting Application for : </p>
+<div class="wholePage_Margins">
+    <div class="container">
+        <div class="m-4 onPatch">
+            <!-- Add your text here -->
+            <h1>Hi, Welcome to BLang Yesho!</h1>
+            <p class="fw-medium fs-5 pt-2">BLang is an Accounting Application for : </p>
             <ul class="">
                 <li class="pt-2">Recording day to day Transactions of your Business in the Books of Accounts.</li>
                 <li class="pt-2">Classifying such Transactions into individual Ledgers. </li>
-                <li class="pt-2">Generating Financial Statements to evaluate Performance and Position of Businesses. </li>
+                <li class="pt-2">Generating Financial Statements to evaluate Performance and Position of Businesses.
+                </li>
                 <li class="pt-2">Helps in calculation and filing of Taxation at your Businesses. </li>
                 <li class="pt-2">Automated Accounting Application, BLang makes Books of Accounts effective. </li>
             </ul>
-            <button type="button" class="purple-button">Company</button>
-        
+            <button type="button" class="purple-button" (click)="openmodal()">Company</button>
+
+        </div>
+        <img src="../assets/images/Company-Image.png" alt="" height="350" width="40%" class="image-in-curve">
     </div>
-    <img src="../assets/images/Company-Image.png" alt="" height="350" width="40%" class="image-in-curve">
+    <!-- 
+<h4 class="mt-4 row">Recent Four Companies</h4>
+<hr style="height: 2px; color: black; background-color: black; margin-right:62px ;" class="row">
+
+<div class="mt-4">
+    <div class="row">
+        <div class="col-6 card">
+            <h3>TCS</h3>
+            <p>Tata Consultancy Services (TCS) is a leading IT services, consulting, and business solutions
+                organization.</p>
+        </div>
+        <div class="col-6 card" style="margin-left: 37px;">
+            <h3>Infosys</h3>
+            <p>Infosys is a global leader in consulting, technology, and outsourcing solutions.</p>
+        </div>
+    </div>
 </div>
 
+<div class="mt-1">
+    <div class="row">
+        <div class="col-6 card">
+            <h3>HCL</h3>
+            <p>HCL  is a leading IT services, consulting, and business solutions
+                organization.</p>
+        </div>
+        <div class="col-6 card" style="margin-left: 37px;">
+            <h3 >Apple</h3>
+            <p>Apple is a global leader in consulting, technology, and outsourcing solutions.</p>
+        </div>
+    </div>
+</div> -->
+
+    <h4 class="mt-4 row">Recent Four Companies</h4>
+    <hr style="height: 2px; color: black; background-color: black; margin-right: 0px;" class="row">
+
+    <div class="mt-4">
+        <div class="row">
+            <div *ngFor="let company of companies; let i = index" class="col-6 card"
+                [ngClass]="{ 'right-margin': i % 2 === 1 }">
+                <h3 class="mt-3">{{ company.name }}</h3>
+                <p>{{ company.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-4 row">About BLang</h4>
+    <hr style="height: 2px; color: black; background-color: black; margin-right: 0px;" class="row">
+
+    <div class="row mt-4">
+        <div class="Blang-Card" style="margin-right: 16px; padding-right: 60px;
+    ">
+            <p>We are a technology & innovation company. Delivering business software for Small and Medium Businesses
+                (SMBs) is our passion. What sets a company apart is as much in its DNA as its achievements.</p>
+            <p class="mt-3">With a strong research and development division, BLang strives to deliver innovation and
+                excellence in
+                enterprise resource planning software for small and medium businesses. We believe that 'velocity of
+                money' is key to driving economic growth. Hence, in order to achieve our goal, our technologies will be
+                centered around simplifying commerce for people all over the world and making it easier for people to
+                transact. This will ensure that more value gets added, more gets demanded, more is spent, and more is
+                earned. A faster cycle is a winning situation for all stakeholders and creates a happier world.</p>
+            <p class="mt-3"><strong>"To Make Everyone Who Touches Tally Happier" .</strong></p>
+            <p class="mt-3">We believe that all expansion and pursuit of expansion leads to happiness while all
+                contraction and fear of contraction leads to unhappiness.</p>
+            <p class="mt-3">When we constantly strive to make 'everyone' 'happier', it brings in new dimensions to our
+                thinking. Our purpose remains the most indispensable part of our actions and helps us continuously add
+                value to people's lives.</p>
+        </div>
+    </div>
+
+
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, TemplateRef, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from 'src/app/core/services/language.service';
@@ -10,6 +10,8 @@ import { DOCUMENT } from '@angular/common';
 import { MENU } from 'src/app/layouts/horizontaltopbar/menu';
 import { MenuItem } from 'src/app/layouts/sidebar/menu.model';
 import { environment } from 'src/environments/environment';
+import { CompanyComponent } from '../company/company.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-setup-company',
@@ -22,8 +24,17 @@ export class SetupCompanyComponent {
   flagvalue;
   countryName;
   valueset;
+  modelref:any;
+  @ViewChild('companyComponent') CompanyComponent: TemplateRef <any>;
 
   menuItems = [];
+
+  companies = [
+    { name: 'TCS', description: 'Tata Consultancy Services (TCS) is a leading IT services, consulting, and business solutions organization.' },
+    { name: 'Infosys', description: 'Infosys is a global leader in consulting, technology, and outsourcing solutions.' },
+    { name: 'HCL', description: 'HCL is a leading IT services, consulting, and business solutions organization.' },
+    { name: 'Apple', description: 'Apple is a global leader in consulting, technology, and outsourcing solutions.' }
+  ];
 
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
@@ -38,6 +49,7 @@ export class SetupCompanyComponent {
     private authFackservice: AuthfakeauthenticationService,
     public languageService: LanguageService,
     // tslint:disable-next-line: variable-name
+    // private modalService:BsModalService,
     public _cookiesService: CookieService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -259,6 +271,10 @@ export class SetupCompanyComponent {
    */
   hasItems(item: MenuItem) {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
+  }
+
+  openmodal(){
+    // this.modelref = this.modalService.show(CompanyComponent, {class:'modal-xl'});
   }
 
 }

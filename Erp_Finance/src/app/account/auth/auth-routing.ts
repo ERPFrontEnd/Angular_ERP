@@ -10,6 +10,7 @@ import { Register2Component } from './register2/register2.component';
 import { Recoverpwd2Component } from './recoverpwd2/recoverpwd2.component';
 import { SetupCompanyComponent } from './setup-company/setup-company.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { CompanyComponent } from './company/company.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,10 @@ const routes: Routes = [
         path: 'setup-company',
         component: SetupCompanyComponent
     },
+    {
+    path:'company',
+    component: CompanyComponent
+    }
 ];
 
 @NgModule({
